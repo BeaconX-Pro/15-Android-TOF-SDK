@@ -1,0 +1,29 @@
+buildscript {
+    repositories {
+        mavenCentral()
+//        jcenter()
+        google()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        google()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+//        jcenter()
+        maven { url "https://jitpack.io" }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
