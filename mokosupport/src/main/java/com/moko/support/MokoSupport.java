@@ -13,13 +13,12 @@ import com.moko.ble.lib.event.ConnectStatusEvent;
 import com.moko.ble.lib.event.OrderTaskResponseEvent;
 import com.moko.ble.lib.task.OrderTask;
 import com.moko.ble.lib.task.OrderTaskResponse;
-import com.moko.support.entity.ExportData;
 import com.moko.support.entity.OrderCHAR;
+import com.moko.support.entity.ParamsKeyEnum;
 import com.moko.support.handler.MokoCharacteristicHandler;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -131,14 +130,15 @@ public class MokoSupport extends MokoBleLib {
     public boolean orderNotify(BluetoothGattCharacteristic characteristic, byte[] value) {
         final UUID responseUUID = characteristic.getUuid();
         OrderCHAR orderCHAR = null;
-        if (responseUUID.equals(OrderCHAR.CHAR_DISCONNECT.getUuid())) {
-            orderCHAR = OrderCHAR.CHAR_DISCONNECT;
-        }
-        if (responseUUID.equals(OrderCHAR.CHAR_ACC.getUuid())) {
-            orderCHAR = OrderCHAR.CHAR_ACC;
-        }
-        if (responseUUID.equals(OrderCHAR.CHAR_HALL.getUuid())) {
-            orderCHAR = OrderCHAR.CHAR_HALL;
+        if (responseUUID.equals(OrderCHAR.CHAR_PARAMS.getUuid())) {
+            int head = value[0] & 0xFF;
+            int cmd = value[1] & 0xFF;
+            int flag = value[2] & 0xFF;
+            int length = value[3] & 0xFF;
+            if (head != 0xEB || cmd != ParamsKeyEnum.KEY_SET_ACC_ENABLE.getParamsKey()
+                    || flag != 1 || length != 6)
+                return false;
+            orderCHAR = OrderCHAR.CHAR_PARAMS;
         }
         if (orderCHAR == null)
             return false;

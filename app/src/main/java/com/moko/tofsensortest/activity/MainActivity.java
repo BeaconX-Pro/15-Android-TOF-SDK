@@ -1,8 +1,8 @@
 package com.moko.tofsensortest.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.moko.ble.lib.MokoConstants;
 import com.moko.ble.lib.event.ConnectStatusEvent;
@@ -12,6 +12,7 @@ import com.moko.ble.lib.task.OrderTaskResponse;
 import com.moko.ble.lib.utils.MokoUtils;
 import com.moko.support.MokoBleScanner;
 import com.moko.support.MokoSupport;
+import com.moko.support.OrderTaskAssembler;
 import com.moko.support.callback.MokoScanDeviceCallback;
 import com.moko.support.entity.DeviceInfo;
 import com.moko.support.entity.OrderCHAR;
@@ -20,18 +21,13 @@ import com.moko.tofsensortest.adapter.AdvInfo;
 import com.moko.tofsensortest.databinding.ActivityMainBinding;
 import com.moko.tofsensortest.utils.AdvInfoAnalysisImpl;
 import com.moko.tofsensortest.utils.ToastUtils;
-import com.moko.tofsensortest.view.LoadingDialog;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-
-import no.nordicsemi.android.dfu.DfuServiceInitiator;
 
 
 public class MainActivity extends BaseActivity implements MokoScanDeviceCallback {
@@ -48,10 +44,18 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         setContentView(mBind.getRoot());
         MokoSupport.getInstance().init(getApplicationContext());
         mokoBleScanner = new MokoBleScanner();
+        advInfoList = new ArrayList<>();
         adapter = new AdInfoAdapter(advInfoList);
         mBind.rvList.setAdapter(adapter);
         mBind.btnStart.setOnClickListener(v -> scanStart());
         mBind.btnConnect.setOnClickListener(v -> connectDevice());
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -68,7 +72,6 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         }
         if (null != advInfoList && advInfoList.size() > 0) advInfoList.clear();
         adapter.replaceData(advInfoList);
-        if (null == advInfoList) advInfoList = new ArrayList<>();
         long time = Long.parseLong(mBind.etTime.getText().toString()) * 1000;
         startScan();
         mBind.btnStart.postDelayed(() -> {
@@ -97,7 +100,9 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
     public void onConnectStatusEvent(ConnectStatusEvent event) {
         String action = event.getAction();
         if (MokoConstants.ACTION_DISCONNECTED.equals(action)) {
-
+            dismissLoadingProgressDialog();
+            dismissMessageProgressDialog();
+            ToastUtils.showToast(this, "设备已断开");
         }
         if (MokoConstants.ACTION_DISCOVER_SUCCESS.equals(action)) {
             // 设备连接成功，通知页面更新
@@ -105,7 +110,7 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
             showMessageProgressDialog("Syncing...");
             mBind.btnConnect.postDelayed(() -> {
                 ArrayList<OrderTask> orderTasks = new ArrayList<>();
-                orderTasks.add(OrderTaskAssembler.setPassword("Unabiz"));
+                orderTasks.add(OrderTaskAssembler.setPassword("MOKOMOKO"));
                 MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
             }, 500);
 
@@ -126,30 +131,16 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
             byte[] value = response.responseValue;
             switch (orderCHAR) {
                 case CHAR_PASSWORD:
+                    dismissMessageProgressDialog();
                     if (value.length == 1) {
                         if (MokoUtils.toInt(value) == 0) {
-                            // 获取
-                            ArrayList<OrderTask> orderTasks = new ArrayList<>();
-                            orderTasks.add(OrderTaskAssembler.getTagId());
-                            MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
+                            // 跳转设置页面
+                            Intent intent = new Intent(this, DeviceInfoActivity.class);
+                            startActivity(intent);
                         } else {
-                            dismissMessageProgressDialog();
                             ToastUtils.showToast(MainActivity.this, "password error");
-                            mokoBleScanner.startScanDevice(this);
-                            mHandler.postDelayed(() -> {
-                                mokoBleScanner.stopScanDevice();
-                            }, 10 * 1000);
                         }
                     }
-                    break;
-                case CHAR_PARAMS:
-                    int header = value[0] & 0xFF;// 0xEB
-                    int cmd = value[1] & 0xFF;
-                    if (header != 0xEB)
-                        return;
-                    ParamsKeyEnum configKeyEnum = ParamsKeyEnum.fromParamKey(cmd);
-                    if (configKeyEnum == null)
-                        return;
                     break;
             }
         }

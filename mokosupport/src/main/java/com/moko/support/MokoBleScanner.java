@@ -20,7 +20,7 @@ import no.nordicsemi.android.support.v18.scanner.ScanResult;
 import no.nordicsemi.android.support.v18.scanner.ScanSettings;
 
 public final class MokoBleScanner {
-    public static final int MANUFACTURER_ID = 0x5900;
+    public static final int MANUFACTURER_ID = 0x0059;
 
     private MokoLeScanHandler mMokoLeScanHandler;
     private MokoScanDeviceCallback mMokoScanDeviceCallback;
@@ -37,6 +37,7 @@ public final class MokoBleScanner {
         List<ScanFilter> scanFilterList = new ArrayList<>();
         ScanFilter.Builder builder = new ScanFilter.Builder();
         builder.setManufacturerData(MANUFACTURER_ID, null);
+//        builder.setDeviceAddress("C3:43:45:D7:D8:4E");
         scanFilterList.add(builder.build());
 //        List<ScanFilter> scanFilterList = Collections.singletonList(new ScanFilter.Builder().build());
         mMokoLeScanHandler = new MokoLeScanHandler(callback);

@@ -20,7 +20,7 @@ public class AdInfoAdapter extends BaseQuickAdapter<AdvInfo, BaseViewHolder> {
 
     @Override
     protected void convert(BaseViewHolder helper, AdvInfo item) {
-        helper.setText(R.id.tvTime, item.getScanTime());
-        helper.setText(R.id.tvAxis, "x:" + item.getAxisX() + "mg y:" + item.getAxisY() + "mg z:" + item.getAxisZ() + "mg");
+        helper.setText(R.id.tvTime, item.scanTime);
+        helper.setText(R.id.tvRangingDistance, String.format("距离值：%s", item.distance));
     }
 }

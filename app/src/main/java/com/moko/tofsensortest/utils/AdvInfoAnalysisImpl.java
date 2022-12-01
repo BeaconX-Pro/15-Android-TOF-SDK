@@ -33,8 +33,8 @@ public class AdvInfoAnalysisImpl implements AdvInfoAnalysis<AdvInfo> {
         int beaconType = MokoUtils.toInt(Arrays.copyOfRange(manufacturerSpecificData, 0, 2));
         if (beaconType != 0x076C)
             return null;
-        int distance = manufacturerSpecificData[8] << 8 + manufacturerSpecificData[7];
-        AdvInfo advInfo = null;
+        int distance = ((manufacturerSpecificData[8] & 0xFF) << 8) + (manufacturerSpecificData[7] & 0xFF);
+        AdvInfo advInfo = new AdvInfo();
         advInfo.scanTime = sdf.format(new Date(System.currentTimeMillis()));
         advInfo.mac = deviceInfo.mac;
         advInfo.distance = String.format("%dmm", distance);
