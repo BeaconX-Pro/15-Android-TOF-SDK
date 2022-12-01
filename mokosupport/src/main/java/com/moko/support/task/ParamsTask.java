@@ -23,6 +23,8 @@ public class ParamsTask extends OrderTask {
     public void getData(ParamsKeyEnum key) {
         switch (key) {
             case KEY_GET_SAMPLE_RATE:
+            case KEY_GET_SAMPLE_NUMBER:
+            case KEY_GET_SINGLE_SAMPLE_TIME:
                 createGetParamsData(key.getParamsKey());
                 break;
         }
@@ -77,6 +79,28 @@ public class ParamsTask extends OrderTask {
                 bytes[5],
                 bytes[6],
                 bytes[7],
+        };
+        response.responseValue = data;
+    }
+
+    public void setSampleNumber(int number) {
+        data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_SAMPLE_NUMBER.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x01,
+                (byte) number
+        };
+        response.responseValue = data;
+    }
+
+    public void setSingleSampleTime(int time) {
+        data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_SINGLE_SAMPLE_TIME.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x01,
+                (byte) time
         };
         response.responseValue = data;
     }

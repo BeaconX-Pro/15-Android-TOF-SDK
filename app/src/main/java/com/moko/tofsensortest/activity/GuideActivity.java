@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 
-import com.elvishew.xlog.XLog;
 import com.moko.tofsensortest.R;
 import com.moko.tofsensortest.utils.Utils;
 import com.moko.tofsensortest.view.PermissionDialog;

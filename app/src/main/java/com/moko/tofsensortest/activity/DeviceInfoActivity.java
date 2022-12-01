@@ -29,6 +29,9 @@ import java.util.Arrays;
 public class DeviceInfoActivity extends BaseActivity {
     private ActivityDeviceInfoBinding mBind;
 
+    private boolean savedParamsError;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +46,8 @@ public class DeviceInfoActivity extends BaseActivity {
             orderTasks.add(OrderTaskAssembler.getTxPower());
             orderTasks.add(OrderTaskAssembler.getAdvInterval());
             orderTasks.add(OrderTaskAssembler.getSampleRate());
+            orderTasks.add(OrderTaskAssembler.getSampleNumber());
+            orderTasks.add(OrderTaskAssembler.getSingleSampleTime());
             orderTasks.add(OrderTaskAssembler.setAccEnable(1));
             MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
         }, 500);
@@ -122,8 +127,29 @@ public class DeviceInfoActivity extends BaseActivity {
                             byte[] rawBytes = Arrays.copyOfRange(value, 4, 4 + length);
                             mBind.etSampleRate.setText(String.valueOf(MokoUtils.toInt(rawBytes)));
                             break;
+                        case KEY_GET_SAMPLE_NUMBER:
+                            int number = value[4] & 0xFF;
+                            mBind.etSampleNumber.setText(String.valueOf(number));
+                            break;
+                        case KEY_GET_SINGLE_SAMPLE_TIME:
+                            int time = value[4] & 0xFF;
+                            mBind.etSingleSampleTime.setText(String.valueOf(time));
+                            break;
+                        case KEY_SET_SAMPLE_NUMBER:
+                        case KEY_SET_SINGLE_SAMPLE_TIME:
+                            if (value[4] == 0) {
+                                savedParamsError = true;
+                            }
+                            break;
                         case KEY_SET_SAMPLE_RATE:
-                            ToastUtils.showToast(this, "保存成功！");
+                            if (value[4] == 0) {
+                                savedParamsError = true;
+                            }
+                            if (savedParamsError) {
+                                ToastUtils.showToast(this, "保存失败！");
+                            } else {
+                                ToastUtils.showToast(this, "保存成功！");
+                            }
                             break;
                     }
                     break;
@@ -151,8 +177,12 @@ public class DeviceInfoActivity extends BaseActivity {
         String txPowerStr = mBind.etTxPower.getText().toString();
         String advIntervalStr = mBind.etAdvInterval.getText().toString();
         String sampleRateStr = mBind.etSampleRate.getText().toString();
+        String sampleNumberStr = mBind.etSampleNumber.getText().toString();
+        String singleSampleTimeStr = mBind.etSingleSampleTime.getText().toString();
         if (TextUtils.isEmpty(txPowerStr)
                 || TextUtils.isEmpty(advIntervalStr)
+                || TextUtils.isEmpty(sampleNumberStr)
+                || TextUtils.isEmpty(singleSampleTimeStr)
                 || TextUtils.isEmpty(sampleRateStr)) {
             ToastUtils.showToast(this, "不能为空");
             return;
@@ -173,10 +203,22 @@ public class DeviceInfoActivity extends BaseActivity {
             ToastUtils.showToast(this, "采样频率不合法");
             return;
         }
+        int sampleNumber = Integer.parseInt(sampleNumberStr);
+        if (sampleNumber < 2 || sampleNumber > 255) {
+            ToastUtils.showToast(this, "周期采样次数不合法");
+            return;
+        }
+        int singleSampleTime = Integer.parseInt(singleSampleTimeStr);
+        if (singleSampleTime < 8 || singleSampleTime > 140) {
+            ToastUtils.showToast(this, "单次采样时间不合法");
+            return;
+        }
         showLoadingProgressDialog();
         ArrayList<OrderTask> orderTasks = new ArrayList<>();
         orderTasks.add(OrderTaskAssembler.setTxPower(txPowerEnum.ordinal()));
         orderTasks.add(OrderTaskAssembler.setAdvInterval(advInterval));
+        orderTasks.add(OrderTaskAssembler.setSampleNumber(sampleNumber));
+        orderTasks.add(OrderTaskAssembler.setSingleSampleTime(singleSampleTime));
         orderTasks.add(OrderTaskAssembler.setSampleRate(sampleRate));
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
     }

@@ -65,5 +65,28 @@ public class OrderTaskAssembler {
         task.setTime();
         return task;
     }
+
+    public static OrderTask getSampleNumber() {
+        ParamsTask task = new ParamsTask();
+        task.getData(ParamsKeyEnum.KEY_GET_SAMPLE_NUMBER);
+        return task;
+    }
+
+    public static OrderTask setSingleSampleTime(int time) {
+        ParamsTask task = new ParamsTask();
+        task.setSingleSampleTime(time);
+        return task;
+    }
+    public static OrderTask getSingleSampleTime() {
+        ParamsTask task = new ParamsTask();
+        task.getData(ParamsKeyEnum.KEY_GET_SINGLE_SAMPLE_TIME);
+        return task;
+    }
+
+    public static OrderTask setSampleNumber(int number) {
+        ParamsTask task = new ParamsTask();
+        task.setSampleNumber(number);
+        return task;
+    }
 }
 

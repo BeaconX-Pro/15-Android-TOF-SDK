@@ -63,7 +63,7 @@
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -91,7 +91,7 @@
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -119,7 +119,7 @@
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.7"
+            app:layout_constraintHorizontal_bias="0.8"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -136,20 +136,76 @@
             app:layout_constraintBaseline_toBaselineOf="@id/et_sample_rate"
             app:layout_constraintRight_toLeftOf="@id/et_sample_rate" />
 
+        <EditText
+            android:id="@+id/et_sample_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="2~255"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:text="周期采样次数"
+            android:textSize="15sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/et_sample_number"
+            app:layout_constraintRight_toLeftOf="@id/et_sample_number" />
+
+        <EditText
+            android:id="@+id/et_single_sample_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="8~140"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintWidth_percent="0.6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp"
+            android:text="单次采样时间"
+            android:textSize="15sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/et_single_sample_time"
+            app:layout_constraintRight_toLeftOf="@id/et_single_sample_time" />
+
         <TextView
             android:id="@+id/tv_acc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingBottom="5dp"
-            android:textSize="15sp"
             android:text=""
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintVertical_bias="0.6"
             app:layout_constraintWidth_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

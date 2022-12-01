@@ -1,16 +1,12 @@
 package com.moko.support;
 
 import android.bluetooth.BluetoothDevice;
-import android.content.Context;
-import android.os.ParcelUuid;
 
 import com.moko.ble.lib.utils.MokoUtils;
 import com.moko.support.callback.MokoScanDeviceCallback;
 import com.moko.support.entity.DeviceInfo;
-import com.moko.support.entity.OrderServices;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import no.nordicsemi.android.support.v18.scanner.BluetoothLeScannerCompat;
