@@ -146,9 +146,9 @@ public class DeviceInfoActivity extends BaseActivity {
                                 savedParamsError = true;
                             }
                             if (savedParamsError) {
-                                ToastUtils.showToast(this, "保存失败！");
+                                ToastUtils.showToast(this, "Save Failed！");
                             } else {
-                                ToastUtils.showToast(this, "保存成功！");
+                                ToastUtils.showToast(this, "Save Success！");
                             }
                             break;
                     }
@@ -184,33 +184,33 @@ public class DeviceInfoActivity extends BaseActivity {
                 || TextUtils.isEmpty(sampleNumberStr)
                 || TextUtils.isEmpty(singleSampleTimeStr)
                 || TextUtils.isEmpty(sampleRateStr)) {
-            ToastUtils.showToast(this, "不能为空");
+            ToastUtils.showToast(this, "The param can not be empty");
             return;
         }
         int txPower = Integer.parseInt(txPowerStr);
         TxPowerEnum txPowerEnum = TxPowerEnum.fromTxPower(txPower);
         if (txPowerEnum == null) {
-            ToastUtils.showToast(this, "广播功率不合法");
+            ToastUtils.showToast(this, "Tx Power Error");
             return;
         }
         int advInterval = Integer.parseInt(advIntervalStr);
         if (advInterval < 1 || advInterval > 86400) {
-            ToastUtils.showToast(this, "广播间隔不合法");
+            ToastUtils.showToast(this, "Adv Interval Error");
             return;
         }
         int sampleRate = Integer.parseInt(sampleRateStr);
         if (sampleRate < 1 || sampleRate > 86400) {
-            ToastUtils.showToast(this, "采样频率不合法");
+            ToastUtils.showToast(this, "ToF interval Error");
             return;
         }
         int sampleNumber = Integer.parseInt(sampleNumberStr);
         if (sampleNumber < 2 || sampleNumber > 255) {
-            ToastUtils.showToast(this, "周期采样次数不合法");
+            ToastUtils.showToast(this, "Period Sampling Times Error");
             return;
         }
         int singleSampleTime = Integer.parseInt(singleSampleTimeStr);
         if (singleSampleTime < 8 || singleSampleTime > 140) {
-            ToastUtils.showToast(this, "单次采样时间不合法");
+            ToastUtils.showToast(this, "Period Sampling duration Error");
             return;
         }
         showLoadingProgressDialog();

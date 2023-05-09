@@ -25,5 +25,5 @@
         android:gravity="center_vertical"
         android:textColor="@color/black_333333"
         android:textSize="14sp"
-        tools:text="距离值：111mm" />
+        tools:text="Distance：111mm" />
 </LinearLayout>

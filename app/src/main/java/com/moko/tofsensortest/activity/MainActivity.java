@@ -63,11 +63,11 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
      */
     private void scanStart() {
         if (TextUtils.isEmpty(mBind.etMac.getText())) {
-            ToastUtils.showToast(this, "请设置mac过滤条件");
+            ToastUtils.showToast(this, "Please set mac filtering conditions");
             return;
         }
         if (TextUtils.isEmpty(mBind.etTime.getText())) {
-            ToastUtils.showToast(this, "请设置扫描时长，单位秒");
+            ToastUtils.showToast(this, "Set the scanning duration (unit: second)");
             return;
         }
         if (null != advInfoList && advInfoList.size() > 0) advInfoList.clear();
@@ -83,11 +83,11 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
     private void connectDevice() {
         final String mac = mBind.etMac.getText().toString();
         if (TextUtils.isEmpty(mBind.etMac.getText())) {
-            ToastUtils.showToast(this, "请设置mac过滤条件");
+            ToastUtils.showToast(this, "Please set mac filtering conditions");
             return;
         }
         if (mac.length() != 12) {
-            ToastUtils.showToast(this, "MAC地址格式不正确");
+            ToastUtils.showToast(this, "The MAC address format is incorrect");
             return;
         }
         showLoadingProgressDialog();
@@ -102,7 +102,7 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         if (MokoConstants.ACTION_DISCONNECTED.equals(action)) {
             dismissLoadingProgressDialog();
             dismissMessageProgressDialog();
-            ToastUtils.showToast(this, "设备已断开");
+            ToastUtils.showToast(this, "Disconnect");
         }
         if (MokoConstants.ACTION_DISCOVER_SUCCESS.equals(action)) {
             // 设备连接成功，通知页面更新

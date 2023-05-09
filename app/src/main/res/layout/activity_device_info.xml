@@ -68,14 +68,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.1"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintWidth_percent="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
-            android:text="广播功率"
+            android:text="Tx Power"
             android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/et_tx_power"
             app:layout_constraintRight_toLeftOf="@id/et_tx_power" />
@@ -96,14 +96,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.2"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintWidth_percent="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
-            android:text="广播间隔"
+            android:text="Adv Interval"
             android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/et_adv_interval"
             app:layout_constraintRight_toLeftOf="@id/et_adv_interval" />
@@ -124,14 +124,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.3"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintWidth_percent="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
-            android:text="采样频率"
+            android:text="ToF interval"
             android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/et_sample_rate"
             app:layout_constraintRight_toLeftOf="@id/et_sample_rate" />
@@ -152,14 +152,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.4"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintWidth_percent="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
-            android:text="周期采样次数"
+            android:text="Period sampling\ntimes"
             android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/et_sample_number"
             app:layout_constraintRight_toLeftOf="@id/et_sample_number" />
@@ -180,14 +180,14 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintWidth_percent="0.6" />
+            app:layout_constraintWidth_percent="0.5" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_marginRight="20dp"
-            android:text="单次采样时间"
+            android:text="Period sampling\nduration"
             android:textSize="15sp"
             app:layout_constraintBaseline_toBaselineOf="@id/et_single_sample_time"
             app:layout_constraintRight_toLeftOf="@id/et_single_sample_time" />

@@ -32,7 +32,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:hint="扫描时长（S）"
+            android:hint="Scan Duration（S）"
             android:inputType="number"
             android:maxLength="5"
             android:paddingStart="10dp"
@@ -52,7 +52,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="1.0"
             android:background="@drawable/shape_radius_blue_btn_bg"
-            android:text="开始扫描"
+            android:text="Start Scanning"
             android:textColor="@color/white_ffffff"
             android:textSize="15sp" />
 
@@ -64,7 +64,7 @@
             android:layout_marginLeft="50dp"
             android:layout_weight="1.0"
             android:background="@drawable/shape_radius_blue_btn_bg"
-            android:text="连接设备"
+            android:text="Connect device"
             android:textColor="@color/white_ffffff"
             android:textSize="15sp" />
     </androidx.appcompat.widget.LinearLayoutCompat>
