@@ -10,6 +10,7 @@ import com.moko.support.callback.MokoScanDeviceCallback;
 import com.moko.support.entity.DeviceInfo;
 import com.moko.tofsensortest.R;
 import com.moko.tofsensortest.databinding.ActivityCarMonitorBinding;
+import com.moko.tofsensortest.utils.SPUtiles;
 import com.moko.tofsensortest.utils.ToastUtils;
 
 import no.nordicsemi.android.support.v18.scanner.ScanRecord;
@@ -40,6 +41,14 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
     }
 
     private void initViews() {
+        mBind.etNum.setText(SPUtiles.getStringValue(this, "num", ""));
+        mBind.etNum.setSelection(null == mBind.etNum.getText() ? 0 : mBind.etNum.getText().length());
+        mBind.etDistance.setText(SPUtiles.getStringValue(this, "distance", ""));
+        mBind.etDistance.setSelection(null == mBind.etDistance.getText() ? 0 : mBind.etDistance.getText().length());
+        mBind.etMacMoko.setText(SPUtiles.getStringValue(this, "macMoKo", ""));
+        mBind.etMacMoko.setSelection(null == mBind.etMacMoko.getText() ? 0 : mBind.etMacMoko.getText().length());
+        mBind.etMacOther.setText(SPUtiles.getStringValue(this, "macOther", ""));
+        mBind.etMacOther.setSelection(null == mBind.etMacOther.getText() ? 0 : mBind.etMacOther.getText().length());
         mBind.ivBack.setOnClickListener(v -> finish());
         mBind.btnStart.setOnClickListener(v -> {
             if (!isScan) {
@@ -74,6 +83,10 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             MokoSupport.getInstance().enableBluetooth();
             return;
         }
+        SPUtiles.setStringValue(this, "num", mBind.etNum.getText().toString().trim());
+        SPUtiles.setStringValue(this, "distance", mBind.etDistance.getText().toString().trim());
+        SPUtiles.setStringValue(this, "macMoKo", mBind.etMacMoko.getText().toString().trim());
+        SPUtiles.setStringValue(this, "macOther", mBind.etMacOther.getText().toString().trim());
         mokoBleScanner.startScanDevice(this);
     }
 
@@ -117,7 +130,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             if (null == data) return;
             mBind.tvMacMoko.setText(device.mac);
             int distance = (((data[8] & 0xFF) << 8) + (data[7] & 0xFF));
-            if (distance < 100 || distance > 5000) return;
+            if (distance < 100) return;
             if (isFirstMoKo) {
                 isFirstMoKo = false;
                 builderMoKo.append(distance);
@@ -159,7 +172,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             mBind.tvMacOther.setText(device.mac);
             //83bc370100aaaa1900000013070600
             int distance = (((data[8] & 0xFF) << 8) + (data[7] & 0xFF));
-            if (distance < 100 || distance > 5000) return;
+            if (distance < 100) return;
             if (isFirstOther) {
                 isFirstOther = false;
                 builderOther.append(distance);
