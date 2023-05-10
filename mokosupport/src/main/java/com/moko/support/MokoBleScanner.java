@@ -32,7 +32,7 @@ public final class MokoBleScanner {
                 .build();
         List<ScanFilter> scanFilterList = new ArrayList<>();
         ScanFilter.Builder builder = new ScanFilter.Builder();
-        builder.setManufacturerData(MANUFACTURER_ID, null);
+//        builder.setManufacturerData(MANUFACTURER_ID, null);
 //        builder.setDeviceAddress("C3:43:45:D7:D8:4E");
         scanFilterList.add(builder.build());
 //        List<ScanFilter> scanFilterList = Collections.singletonList(new ScanFilter.Builder().build());

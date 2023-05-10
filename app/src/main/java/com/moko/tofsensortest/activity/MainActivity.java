@@ -50,6 +50,7 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         mBind.btnStart.setOnClickListener(v -> scanStart());
         mBind.btnConnect.setOnClickListener(v -> connectDevice());
         EventBus.getDefault().register(this);
+        mBind.btnCarMonitor.setOnClickListener(v-> startActivity(new Intent(this, CarMonitorActivity.class)));
     }
 
     @Override
