@@ -30,6 +30,9 @@
         <activity android:name=".activity.CarMonitorActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".activity.RangeDataActivity"
+            android:screenOrientation="portrait"/>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.moko.tofsensortest.fileprovider"

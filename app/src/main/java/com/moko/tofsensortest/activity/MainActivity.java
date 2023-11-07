@@ -91,9 +91,15 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
             ToastUtils.showToast(this, "The MAC address format is incorrect");
             return;
         }
+        StringBuilder builder = new StringBuilder(mac);
+        builder.insert(2,":");
+        builder.insert(5,":");
+        builder.insert(8,":");
+        builder.insert(11,":");
+        builder.insert(14,":");
         showLoadingProgressDialog();
         mBind.btnConnect.postDelayed(() -> {
-            MokoSupport.getInstance().connDevice(mDevice);
+            MokoSupport.getInstance().connDevice(builder.toString().toUpperCase());
         }, 500);
     }
 

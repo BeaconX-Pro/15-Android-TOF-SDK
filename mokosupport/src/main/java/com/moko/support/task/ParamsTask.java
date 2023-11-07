@@ -25,6 +25,7 @@ public class ParamsTask extends OrderTask {
             case KEY_GET_SAMPLE_RATE:
             case KEY_GET_SAMPLE_NUMBER:
             case KEY_GET_SINGLE_SAMPLE_TIME:
+            case KEY_READ_TOF_DISTANCE_MODE:
                 createGetParamsData(key.getParamsKey());
                 break;
         }
@@ -103,5 +104,15 @@ public class ParamsTask extends OrderTask {
                 (byte) time
         };
         response.responseValue = data;
+    }
+
+    public void setTofMode(int mode) {
+        response.responseValue = data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_TOF_DISTANCE_MODE.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x01,
+                (byte) mode
+        };
     }
 }

@@ -1,5 +1,6 @@
 package com.moko.tofsensortest.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -40,17 +41,17 @@ public class DeviceInfoActivity extends BaseActivity {
 
         EventBus.getDefault().register(this);
         showLoadingProgressDialog();
-        mBind.tvTitle.postDelayed(() -> {
-            ArrayList<OrderTask> orderTasks = new ArrayList<>();
-            orderTasks.add(OrderTaskAssembler.setTime());
-            orderTasks.add(OrderTaskAssembler.getTxPower());
-            orderTasks.add(OrderTaskAssembler.getAdvInterval());
-            orderTasks.add(OrderTaskAssembler.getSampleRate());
-            orderTasks.add(OrderTaskAssembler.getSampleNumber());
-            orderTasks.add(OrderTaskAssembler.getSingleSampleTime());
-            orderTasks.add(OrderTaskAssembler.setAccEnable(1));
-            MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
-        }, 500);
+        ArrayList<OrderTask> orderTasks = new ArrayList<>();
+        orderTasks.add(OrderTaskAssembler.setTime());
+        orderTasks.add(OrderTaskAssembler.getTxPower());
+        orderTasks.add(OrderTaskAssembler.getAdvInterval());
+        orderTasks.add(OrderTaskAssembler.getSampleRate());
+        orderTasks.add(OrderTaskAssembler.getSampleNumber());
+        orderTasks.add(OrderTaskAssembler.getSingleSampleTime());
+        orderTasks.add(OrderTaskAssembler.getTofMode());
+        orderTasks.add(OrderTaskAssembler.setAccEnable(1));
+        MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
+        mBind.btnRange.setOnClickListener(v -> startActivity(new Intent(this, RangeDataActivity.class)));
     }
 
     @Override
@@ -137,11 +138,12 @@ public class DeviceInfoActivity extends BaseActivity {
                             break;
                         case KEY_SET_SAMPLE_NUMBER:
                         case KEY_SET_SINGLE_SAMPLE_TIME:
+                        case KEY_SET_SAMPLE_RATE:
                             if (value[4] == 0) {
                                 savedParamsError = true;
                             }
                             break;
-                        case KEY_SET_SAMPLE_RATE:
+                        case KEY_SET_TOF_DISTANCE_MODE:
                             if (value[4] == 0) {
                                 savedParamsError = true;
                             }
@@ -150,6 +152,13 @@ public class DeviceInfoActivity extends BaseActivity {
                             } else {
                                 ToastUtils.showToast(this, "Save Success！");
                             }
+                            break;
+
+                        case KEY_READ_TOF_DISTANCE_MODE:
+                            int mode = value[4] & 0xff;
+                            //短距模式
+                            mBind.btnShort.setChecked(mode == 1);
+                            mBind.btnLong.setChecked(mode == 2);
                             break;
                     }
                     break;
@@ -220,6 +229,7 @@ public class DeviceInfoActivity extends BaseActivity {
         orderTasks.add(OrderTaskAssembler.setSampleNumber(sampleNumber));
         orderTasks.add(OrderTaskAssembler.setSingleSampleTime(singleSampleTime));
         orderTasks.add(OrderTaskAssembler.setSampleRate(sampleRate));
+        orderTasks.add(OrderTaskAssembler.setTofMode(mBind.btnShort.isChecked() ? 1 : 2));
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
     }
 }

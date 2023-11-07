@@ -140,8 +140,10 @@ public class MokoSupport extends MokoBleLib {
                 return false;
             orderCHAR = OrderCHAR.CHAR_PARAMS;
         }
-        if (orderCHAR == null)
-            return false;
+        if (responseUUID.equals(OrderCHAR.CHAR_TOF_NOTIFY.getUuid())) {
+            orderCHAR = OrderCHAR.CHAR_TOF_NOTIFY;
+        }
+        if (orderCHAR == null) return false;
         XLog.i(orderCHAR.name());
         OrderTaskResponse response = new OrderTaskResponse();
         response.orderCHAR = orderCHAR;
@@ -151,5 +153,13 @@ public class MokoSupport extends MokoBleLib {
         event.setResponse(response);
         EventBus.getDefault().post(event);
         return true;
+    }
+
+    public void enableToFSensorNotify() {
+        if (null != mBleConfig) mBleConfig.enableToFNotify();
+    }
+
+    public void disableToFSensorNotify() {
+        if (null != mBleConfig) mBleConfig.disableToFNotify();
     }
 }

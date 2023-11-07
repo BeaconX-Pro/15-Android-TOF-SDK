@@ -88,5 +88,17 @@ public class OrderTaskAssembler {
         task.setSampleNumber(number);
         return task;
     }
+
+    public static OrderTask getTofMode() {
+        ParamsTask task = new ParamsTask();
+        task.getData(ParamsKeyEnum.KEY_READ_TOF_DISTANCE_MODE);
+        return task;
+    }
+
+    public static OrderTask setTofMode(int mode) {
+        ParamsTask task = new ParamsTask();
+        task.setTofMode(mode);
+        return task;
+    }
 }
 

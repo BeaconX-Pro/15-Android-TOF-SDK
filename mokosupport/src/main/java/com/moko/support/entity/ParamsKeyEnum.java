@@ -12,6 +12,8 @@ public enum ParamsKeyEnum implements Serializable {
     KEY_SET_SAMPLE_NUMBER(0x78),
     KEY_GET_SINGLE_SAMPLE_TIME(0x7B),
     KEY_SET_SINGLE_SAMPLE_TIME(0x7A),
+    KEY_READ_TOF_DISTANCE_MODE(0x7D),
+    KEY_SET_TOF_DISTANCE_MODE(0x7C),
     ;
 
     private int paramsKey;

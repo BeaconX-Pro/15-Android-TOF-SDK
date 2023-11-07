@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -192,21 +193,62 @@
             app:layout_constraintBaseline_toBaselineOf="@id/et_single_sample_time"
             app:layout_constraintRight_toLeftOf="@id/et_single_sample_time" />
 
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/et_single_sample_time">
+
+            <RadioButton
+                android:id="@+id/btnShort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:textSize="14sp"
+                android:textColor="@color/black_333333"
+                android:text="Short range mode" />
+
+            <RadioButton
+                android:id="@+id/btnLong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
+                android:textColor="@color/black_333333"
+                android:text="Long range mode" />
+        </RadioGroup>
+
         <TextView
             android:id="@+id/tv_acc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingLeft="5dp"
             android:paddingBottom="5dp"
-            android:text=""
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_bias="0.4"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6"
-            app:layout_constraintWidth_percent="0.5" />
+            app:layout_constraintVertical_bias="0.66"
+            app:layout_constraintWidth_percent="0.5"
+            tools:text="121222222222" />
+
+        <Button
+            android:id="@+id/btnRange"
+            android:layout_width="150dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_radius_blue_btn_bg"
+            android:text="range data"
+            android:textColor="@color/white_ffffff"
+            android:textSize="14sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_acc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

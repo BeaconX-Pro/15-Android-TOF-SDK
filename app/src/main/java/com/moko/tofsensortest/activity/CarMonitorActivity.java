@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 
 import com.elvishew.xlog.XLog;
+import com.moko.ble.lib.utils.MokoUtils;
 import com.moko.support.MokoBleScanner;
 import com.moko.support.MokoSupport;
 import com.moko.support.callback.MokoScanDeviceCallback;
@@ -128,6 +129,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             if (null == scanRecord) return;
             byte[] data = scanRecord.getManufacturerSpecificData(0x0059);
             if (null == data) return;
+            XLog.i("333333moKoAdv**************="+ MokoUtils.bytesToHexString(data));
             mBind.tvMacMoko.setText(device.mac);
             int distance = (((data[8] & 0xFF) << 8) + (data[7] & 0xFF));
             if (distance < 100) return;
@@ -142,7 +144,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             if (split.length == 3) {
                 builderMoKo.delete(0, split[0].length() + 1);
             }
-            XLog.i("333333distanceMoko************=" + distance);
+//            XLog.i("333333distanceMoko************=" + distance);
             if (distance <= this.distance) {
                 //范围内
                 continuousCountMoKoIn++;
@@ -169,6 +171,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             if (null == scanRecord) return;
             byte[] data = scanRecord.getManufacturerSpecificData(0x000D);
             if (null == data) return;
+            XLog.i("333333Adv="+ MokoUtils.bytesToHexString(data));
             mBind.tvMacOther.setText(device.mac);
             //83bc370100aaaa1900000013070600
             int distance = (((data[8] & 0xFF) << 8) + (data[7] & 0xFF));
@@ -184,7 +187,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
             if (split.length == 3) {
                 builderOther.delete(0, split[0].length() + 1);
             }
-            XLog.i("333333distance=" + distance);
+//            XLog.i("333333distance=" + distance);
             if (distance <= this.distance) {
                 //范围内
                 continuousCountOtherIn++;
