@@ -21,14 +21,7 @@ public class ParamsTask extends OrderTask {
     }
 
     public void getData(ParamsKeyEnum key) {
-        switch (key) {
-            case KEY_GET_SAMPLE_RATE:
-            case KEY_GET_SAMPLE_NUMBER:
-            case KEY_GET_SINGLE_SAMPLE_TIME:
-            case KEY_READ_TOF_DISTANCE_MODE:
-                createGetParamsData(key.getParamsKey());
-                break;
-        }
+        createGetParamsData(key.getParamsKey());
     }
 
     private void createGetParamsData(int paramsKey) {
