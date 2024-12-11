@@ -40,7 +40,6 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:clickable="true"
             android:onClick="onSave"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
@@ -193,6 +192,34 @@
             app:layout_constraintBaseline_toBaselineOf="@id/et_single_sample_time"
             app:layout_constraintRight_toLeftOf="@id/et_single_sample_time" />
 
+        <EditText
+            android:id="@+id/etLimitDistance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="10~3200"
+            android:inputType="number"
+            android:maxLength="4"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.8"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="limit sampling\ndistance"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/etLimitDistance"
+            app:layout_constraintRight_toLeftOf="@+id/etLimitDistance"
+            app:layout_constraintTop_toTopOf="@id/etLimitDistance" />
+
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
@@ -200,41 +227,36 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="25dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/et_single_sample_time">
+            app:layout_constraintTop_toBottomOf="@+id/etLimitDistance">
 
             <RadioButton
                 android:id="@+id/btnShort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:textSize="14sp"
+                android:text="Short range mode"
                 android:textColor="@color/black_333333"
-                android:text="Short range mode" />
+                android:textSize="14sp" />
 
             <RadioButton
                 android:id="@+id/btnLong"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:textSize="14sp"
+                android:text="Long range mode"
                 android:textColor="@color/black_333333"
-                android:text="Long range mode" />
+                android:textSize="14sp" />
         </RadioGroup>
 
         <TextView
             android:id="@+id/tv_acc"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingStart="50dp"
             android:paddingLeft="5dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.4"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.66"
-            app:layout_constraintWidth_percent="0.5"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
             tools:text="121222222222" />
 
         <Button

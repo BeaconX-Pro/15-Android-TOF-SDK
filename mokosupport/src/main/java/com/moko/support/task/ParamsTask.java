@@ -115,4 +115,16 @@ public class ParamsTask extends OrderTask {
                 (byte) mode
         };
     }
+
+    public void setLimitDistance(int distance) {
+        byte[] bytes = MokoUtils.toByteArray(distance, 2);
+        response.responseValue = data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_LIMIT_DISTANCE.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x02,
+                bytes[0],
+                bytes[1]
+        };
+    }
 }

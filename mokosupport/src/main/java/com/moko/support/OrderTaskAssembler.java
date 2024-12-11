@@ -10,6 +10,8 @@ import com.moko.support.task.PasswordTask;
 import com.moko.support.task.SetAdvIntervalTask;
 import com.moko.support.task.SetTxPowerTask;
 
+import org.intellij.lang.annotations.JdkConstants;
+
 public class OrderTaskAssembler {
 
     public static OrderTask setPassword(String password) {
@@ -98,6 +100,18 @@ public class OrderTaskAssembler {
     public static OrderTask setTofMode(int mode) {
         ParamsTask task = new ParamsTask();
         task.setTofMode(mode);
+        return task;
+    }
+
+    public static OrderTask getLimitDistance(){
+        ParamsTask task = new ParamsTask();
+        task.getData(ParamsKeyEnum.KEY_GET_LIMIT_DISTANCE);
+        return task;
+    }
+
+    public static OrderTask setLimitDistance(int distance) {
+        ParamsTask task = new ParamsTask();
+        task.setLimitDistance(distance);
         return task;
     }
 }

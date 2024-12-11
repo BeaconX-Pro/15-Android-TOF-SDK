@@ -14,9 +14,11 @@ public enum ParamsKeyEnum implements Serializable {
     KEY_SET_SINGLE_SAMPLE_TIME(0x7A),
     KEY_READ_TOF_DISTANCE_MODE(0x7D),
     KEY_SET_TOF_DISTANCE_MODE(0x7C),
+    KEY_GET_LIMIT_DISTANCE(0x89),
+    KEY_SET_LIMIT_DISTANCE(0x88),
     ;
 
-    private int paramsKey;
+    private final int paramsKey;
 
     ParamsKeyEnum(int paramsKey) {
         this.paramsKey = paramsKey;

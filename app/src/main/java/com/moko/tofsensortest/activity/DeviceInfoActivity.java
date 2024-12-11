@@ -25,6 +25,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 
 public class DeviceInfoActivity extends BaseActivity {
@@ -49,6 +50,7 @@ public class DeviceInfoActivity extends BaseActivity {
         orderTasks.add(OrderTaskAssembler.getSampleNumber());
         orderTasks.add(OrderTaskAssembler.getSingleSampleTime());
         orderTasks.add(OrderTaskAssembler.getTofMode());
+        orderTasks.add(OrderTaskAssembler.getLimitDistance());
         orderTasks.add(OrderTaskAssembler.setAccEnable(1));
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
         mBind.btnRange.setOnClickListener(v -> startActivity(new Intent(this, RangeDataActivity.class)));
@@ -92,8 +94,6 @@ public class DeviceInfoActivity extends BaseActivity {
                     break;
             }
         }
-        if (MokoConstants.ACTION_ORDER_TIMEOUT.equals(action)) {
-        }
         if (MokoConstants.ACTION_ORDER_FINISH.equals(action)) {
             dismissLoadingProgressDialog();
         }
@@ -118,8 +118,7 @@ public class DeviceInfoActivity extends BaseActivity {
                     int head = value[0] & 0xFF;
                     int cmd = value[1] & 0xFF;
                     int length = value[3] & 0xFF;
-                    if (head != 0xEB)
-                        return;
+                    if (head != 0xEB) return;
                     ParamsKeyEnum paramsKeyEnum = ParamsKeyEnum.fromParamKey(cmd);
                     if (paramsKeyEnum == null)
                         return;
@@ -138,6 +137,7 @@ public class DeviceInfoActivity extends BaseActivity {
                             break;
                         case KEY_SET_SAMPLE_NUMBER:
                         case KEY_SET_SINGLE_SAMPLE_TIME:
+                        case KEY_SET_LIMIT_DISTANCE:
                         case KEY_SET_SAMPLE_RATE:
                             if (value[4] == 0) {
                                 savedParamsError = true;
@@ -159,6 +159,12 @@ public class DeviceInfoActivity extends BaseActivity {
                             //短距模式
                             mBind.btnShort.setChecked(mode == 1);
                             mBind.btnLong.setChecked(mode == 2);
+                            break;
+
+                        case KEY_GET_LIMIT_DISTANCE:
+                            int distance = MokoUtils.toInt(Arrays.copyOfRange(value, 4, value.length));
+                            mBind.etLimitDistance.setText(String.valueOf(distance));
+                            mBind.etLimitDistance.setSelection(mBind.etLimitDistance.getText().length());
                             break;
                     }
                     break;
@@ -188,11 +194,13 @@ public class DeviceInfoActivity extends BaseActivity {
         String sampleRateStr = mBind.etSampleRate.getText().toString();
         String sampleNumberStr = mBind.etSampleNumber.getText().toString();
         String singleSampleTimeStr = mBind.etSingleSampleTime.getText().toString();
+        String distance = mBind.etLimitDistance.getText().toString();
         if (TextUtils.isEmpty(txPowerStr)
                 || TextUtils.isEmpty(advIntervalStr)
                 || TextUtils.isEmpty(sampleNumberStr)
                 || TextUtils.isEmpty(singleSampleTimeStr)
-                || TextUtils.isEmpty(sampleRateStr)) {
+                || TextUtils.isEmpty(sampleRateStr)
+                || TextUtils.isEmpty(distance)) {
             ToastUtils.showToast(this, "The param can not be empty");
             return;
         }
@@ -222,12 +230,18 @@ public class DeviceInfoActivity extends BaseActivity {
             ToastUtils.showToast(this, "Period Sampling duration Error");
             return;
         }
+        int limit = Integer.parseInt(distance);
+        if (limit < 10 || limit > 3200) {
+            ToastUtils.showToast(this, "limit distance Error");
+            return;
+        }
         showLoadingProgressDialog();
         ArrayList<OrderTask> orderTasks = new ArrayList<>();
         orderTasks.add(OrderTaskAssembler.setTxPower(txPowerEnum.ordinal()));
         orderTasks.add(OrderTaskAssembler.setAdvInterval(advInterval));
         orderTasks.add(OrderTaskAssembler.setSampleNumber(sampleNumber));
         orderTasks.add(OrderTaskAssembler.setSingleSampleTime(singleSampleTime));
+        orderTasks.add(OrderTaskAssembler.setLimitDistance(limit));
         orderTasks.add(OrderTaskAssembler.setSampleRate(sampleRate));
         orderTasks.add(OrderTaskAssembler.setTofMode(mBind.btnShort.isChecked() ? 1 : 2));
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
