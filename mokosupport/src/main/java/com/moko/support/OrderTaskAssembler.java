@@ -114,5 +114,23 @@ public class OrderTaskAssembler {
         task.setLimitDistance(distance);
         return task;
     }
+
+    public static OrderTask getButtonPowerOffEnable(){
+        ParamsTask task = new ParamsTask();
+        task.getData(ParamsKeyEnum.KEY_GET_POWER_OFF_ENABLE);
+        return task;
+    }
+
+    public static OrderTask setButtonPowerOffEnable(int enable) {
+        ParamsTask task = new ParamsTask();
+        task.setButtonPowerOffEnable(enable);
+        return task;
+    }
+
+    public static OrderTask setDefault(){
+        ParamsTask task = new ParamsTask();
+        task.setDefault();
+        return task;
+    }
 }
 

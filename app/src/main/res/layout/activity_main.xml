@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:paddingEnd="10dp"
         android:orientation="horizontal">
 
         <EditText
@@ -24,7 +25,7 @@
             android:maxLength="12"
             android:paddingStart="10dp"
             android:textColor="@color/black_333333"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <EditText
             android:id="@+id/etTime"
@@ -32,12 +33,12 @@
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
             android:layout_weight="1"
-            android:hint="Scan Duration（S）"
+            android:hint="Scan Duration(S)"
             android:inputType="number"
             android:maxLength="5"
             android:paddingStart="10dp"
             android:textColor="@color/black_333333"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat

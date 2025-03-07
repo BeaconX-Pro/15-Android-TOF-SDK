@@ -50,7 +50,8 @@ public class DeviceInfoActivity extends BaseActivity {
         orderTasks.add(OrderTaskAssembler.getSampleNumber());
         orderTasks.add(OrderTaskAssembler.getSingleSampleTime());
         orderTasks.add(OrderTaskAssembler.getTofMode());
-        orderTasks.add(OrderTaskAssembler.getLimitDistance());
+//        orderTasks.add(OrderTaskAssembler.getLimitDistance());
+        orderTasks.add(OrderTaskAssembler.getButtonPowerOffEnable());
         orderTasks.add(OrderTaskAssembler.setAccEnable(1));
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
         mBind.btnRange.setOnClickListener(v -> startActivity(new Intent(this, RangeDataActivity.class)));
@@ -137,8 +138,9 @@ public class DeviceInfoActivity extends BaseActivity {
                             break;
                         case KEY_SET_SAMPLE_NUMBER:
                         case KEY_SET_SINGLE_SAMPLE_TIME:
-                        case KEY_SET_LIMIT_DISTANCE:
+//                        case KEY_SET_LIMIT_DISTANCE:
                         case KEY_SET_SAMPLE_RATE:
+                        case KEY_SET_POWER_OFF_ENABLE:
                             if (value[4] == 0) {
                                 savedParamsError = true;
                             }
@@ -161,10 +163,15 @@ public class DeviceInfoActivity extends BaseActivity {
                             mBind.btnLong.setChecked(mode == 2);
                             break;
 
-                        case KEY_GET_LIMIT_DISTANCE:
-                            int distance = MokoUtils.toInt(Arrays.copyOfRange(value, 4, value.length));
-                            mBind.etLimitDistance.setText(String.valueOf(distance));
-                            mBind.etLimitDistance.setSelection(mBind.etLimitDistance.getText().length());
+//                        case KEY_GET_LIMIT_DISTANCE:
+//                            int distance = MokoUtils.toInt(Arrays.copyOfRange(value, 4, value.length));
+//                            mBind.etLimitDistance.setText(String.valueOf(distance));
+//                            mBind.etLimitDistance.setSelection(mBind.etLimitDistance.getText().length());
+//                            break;
+
+                        case KEY_GET_POWER_OFF_ENABLE:
+                            mBind.btnEnable.setChecked(value[4] == 1);
+                            mBind.btnDisable.setChecked(value[4] == 0);
                             break;
                     }
                     break;
@@ -194,13 +201,14 @@ public class DeviceInfoActivity extends BaseActivity {
         String sampleRateStr = mBind.etSampleRate.getText().toString();
         String sampleNumberStr = mBind.etSampleNumber.getText().toString();
         String singleSampleTimeStr = mBind.etSingleSampleTime.getText().toString();
-        String distance = mBind.etLimitDistance.getText().toString();
+//        String distance = mBind.etLimitDistance.getText().toString();
         if (TextUtils.isEmpty(txPowerStr)
                 || TextUtils.isEmpty(advIntervalStr)
                 || TextUtils.isEmpty(sampleNumberStr)
                 || TextUtils.isEmpty(singleSampleTimeStr)
-                || TextUtils.isEmpty(sampleRateStr)
-                || TextUtils.isEmpty(distance)) {
+                || TextUtils.isEmpty(sampleRateStr))
+//                || TextUtils.isEmpty(distance))
+        {
             ToastUtils.showToast(this, "The param can not be empty");
             return;
         }
@@ -230,20 +238,22 @@ public class DeviceInfoActivity extends BaseActivity {
             ToastUtils.showToast(this, "Period Sampling duration Error");
             return;
         }
-        int limit = Integer.parseInt(distance);
-        if (limit < 10 || limit > 3200) {
-            ToastUtils.showToast(this, "limit distance Error");
-            return;
-        }
+//        int limit = Integer.parseInt(distance);
+//        if (limit < 10 || limit > 3200) {
+//            ToastUtils.showToast(this, "limit distance Error");
+//            return;
+//        }
         showLoadingProgressDialog();
         ArrayList<OrderTask> orderTasks = new ArrayList<>();
         orderTasks.add(OrderTaskAssembler.setTxPower(txPowerEnum.ordinal()));
         orderTasks.add(OrderTaskAssembler.setAdvInterval(advInterval));
         orderTasks.add(OrderTaskAssembler.setSampleNumber(sampleNumber));
         orderTasks.add(OrderTaskAssembler.setSingleSampleTime(singleSampleTime));
-        orderTasks.add(OrderTaskAssembler.setLimitDistance(limit));
+//        orderTasks.add(OrderTaskAssembler.setLimitDistance(limit));
         orderTasks.add(OrderTaskAssembler.setSampleRate(sampleRate));
+        orderTasks.add(OrderTaskAssembler.setButtonPowerOffEnable(mBind.btnEnable.isChecked() ? 1 : 0));
         orderTasks.add(OrderTaskAssembler.setTofMode(mBind.btnShort.isChecked() ? 1 : 2));
+        orderTasks.add(OrderTaskAssembler.setDefault());
         MokoSupport.getInstance().sendOrder(orderTasks.toArray(new OrderTask[]{}));
     }
 }

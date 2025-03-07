@@ -16,6 +16,9 @@ public enum ParamsKeyEnum implements Serializable {
     KEY_SET_TOF_DISTANCE_MODE(0x7C),
     KEY_GET_LIMIT_DISTANCE(0x89),
     KEY_SET_LIMIT_DISTANCE(0x88),
+    KEY_GET_POWER_OFF_ENABLE(0x71),
+    KEY_SET_POWER_OFF_ENABLE(0x70),
+    KEY_SET_DEFAULT(0x6E),
     ;
 
     private final int paramsKey;

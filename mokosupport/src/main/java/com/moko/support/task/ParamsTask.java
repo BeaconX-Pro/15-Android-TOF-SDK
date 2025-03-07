@@ -120,4 +120,24 @@ public class ParamsTask extends OrderTask {
                 bytes[1]
         };
     }
+
+    public void setButtonPowerOffEnable(int enable) {
+        response.responseValue = data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_POWER_OFF_ENABLE.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x01,
+                (byte) enable
+        };
+    }
+
+    public void setDefault(){
+        response.responseValue = data = new byte[]{
+                (byte) 0xEA,
+                (byte) ParamsKeyEnum.KEY_SET_DEFAULT.getParamsKey(),
+                (byte) 0x00,
+                (byte) 0x01,
+                (byte) 0x00
+        };
+    }
 }

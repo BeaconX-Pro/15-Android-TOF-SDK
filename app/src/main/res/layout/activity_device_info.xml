@@ -15,7 +15,6 @@
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:clickable="true"
             android:drawableLeft="@drawable/back"
             android:drawablePadding="6dp"
             android:gravity="center_vertical"
@@ -59,7 +58,7 @@
             android:hint="-40,-30,-20,-16,-12,-8,-4,0,4"
             android:inputType="numberSigned"
             android:maxLength="3"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -67,7 +66,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.1"
+            app:layout_constraintVertical_bias="0.02"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -87,7 +86,7 @@
             android:hint="1~86400"
             android:inputType="number"
             android:maxLength="5"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -95,7 +94,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.2"
+            app:layout_constraintVertical_bias="0.1"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -115,7 +114,7 @@
             android:hint="1~86400"
             android:inputType="number"
             android:maxLength="5"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +122,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintVertical_bias="0.18"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -143,7 +142,7 @@
             android:hint="2~255"
             android:inputType="number"
             android:maxLength="3"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -151,7 +150,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.4"
+            app:layout_constraintVertical_bias="0.26"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -171,7 +170,7 @@
             android:hint="8~140"
             android:inputType="number"
             android:maxLength="3"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -179,7 +178,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintVertical_bias="0.34"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -192,14 +191,14 @@
             app:layout_constraintBaseline_toBaselineOf="@id/et_single_sample_time"
             app:layout_constraintRight_toLeftOf="@id/et_single_sample_time" />
 
-        <EditText
+        <!--<EditText
             android:id="@+id/etLimitDistance"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:hint="10~3200"
             android:inputType="number"
             android:maxLength="4"
-            android:paddingLeft="5dp"
+            android:paddingLeft="10dp"
             android:paddingBottom="5dp"
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -207,7 +206,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.6"
+            app:layout_constraintVertical_bias="0.42"
             app:layout_constraintWidth_percent="0.5" />
 
         <TextView
@@ -218,16 +217,54 @@
             android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="@id/etLimitDistance"
             app:layout_constraintRight_toLeftOf="@+id/etLimitDistance"
-            app:layout_constraintTop_toTopOf="@id/etLimitDistance" />
+            app:layout_constraintTop_toTopOf="@id/etLimitDistance" />-->
+
+        <RadioGroup
+            android:id="@+id/radioPowerOff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@+id/et_single_sample_time">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="10dp"
+                android:paddingEnd="30dp"
+                android:text="Button Power Off"
+                android:textColor="@color/black_333333"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/btnEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Enable"
+                android:textColor="@color/black_333333"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/btnDisable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="Disable"
+                android:textColor="@color/black_333333"
+                android:textSize="14sp" />
+        </RadioGroup>
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
             android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/etLimitDistance">
+            app:layout_constraintTop_toBottomOf="@+id/radioPowerOff">
 
             <RadioButton
                 android:id="@+id/btnShort"
