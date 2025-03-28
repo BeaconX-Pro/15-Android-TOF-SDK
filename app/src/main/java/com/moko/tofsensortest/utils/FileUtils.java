@@ -13,6 +13,7 @@ import android.provider.OpenableColumns;
 import android.text.TextUtils;
 
 import com.moko.tofsensortest.BaseApplication;
+import com.moko.tofsensortest.activity.ToFMainActivity;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -238,7 +239,7 @@ public class FileUtils {
                 String displayName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
                 try {
                     InputStream is = contentResolver.openInputStream(uri);
-                    File tempFile = new File(BaseApplication.PATH_LOGCAT + File.separator + displayName);
+                    File tempFile = new File(ToFMainActivity.PATH_LOGCAT + File.separator + displayName);
                     FileOutputStream fos = new FileOutputStream(tempFile);
                     copyStream(is, fos);
                     file = tempFile;

@@ -14,6 +14,8 @@ import android.provider.MediaStore;
 
 import com.elvishew.xlog.XLog;
 import com.moko.tofsensortest.BaseApplication;
+import com.moko.tofsensortest.BuildConfig;
+import com.moko.tofsensortest.activity.ToFMainActivity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -47,7 +49,7 @@ public class IOUtils {
         boolean exist = isSdCardExist();
         String sdpath = "";
         if (exist) {
-            sdpath = BaseApplication.PATH_LOGCAT;
+            sdpath = ToFMainActivity.PATH_LOGCAT;
         }
         return sdpath;
 
@@ -61,7 +63,7 @@ public class IOUtils {
      */
     public static String getDefaultFilePath(Context context) {
         String filepath = "";
-        File file = new File(BaseApplication.PATH_LOGCAT, CRASH_FILE);
+        File file = new File(ToFMainActivity.PATH_LOGCAT, CRASH_FILE);
         try {
             if (file.exists()) {
                 filepath = file.getAbsolutePath();
@@ -82,7 +84,7 @@ public class IOUtils {
      */
     public static String getFilePath(String fileName) {
         String filepath = "";
-        File file = new File(BaseApplication.PATH_LOGCAT, fileName);
+        File file = new File(ToFMainActivity.PATH_LOGCAT, fileName);
         try {
             if (file.exists()) {
                 filepath = file.getAbsolutePath();
@@ -223,7 +225,7 @@ public class IOUtils {
         values.put(MediaStore.DownloadColumns.DISPLAY_NAME, file.getName());
         values.put(MediaStore.DownloadColumns.TITLE, file.getName());
         values.put(MediaStore.DownloadColumns.MIME_TYPE, "*/*");
-        values.put(MediaStore.DownloadColumns.RELATIVE_PATH, "Download/ToFSensorTest");
+        values.put(MediaStore.DownloadColumns.RELATIVE_PATH, BuildConfig.IS_LIBRARY ? "Download/mokoBeaconXPro" : "Download/ToFSensorTest");
         Uri external = MediaStore.Downloads.EXTERNAL_CONTENT_URI;
         Uri uri = null;
         ContentResolver cr = context.getContentResolver();

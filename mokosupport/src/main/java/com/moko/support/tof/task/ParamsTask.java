@@ -1,9 +1,9 @@
-package com.moko.support.task;
+package com.moko.support.tof.task;
 
 import com.moko.ble.lib.task.OrderTask;
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.entity.OrderCHAR;
-import com.moko.support.entity.ParamsKeyEnum;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.support.tof.entity.ParamsKeyEnum;
 
 import java.util.Calendar;
 

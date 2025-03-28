@@ -3,20 +3,19 @@ package com.moko.tofsensortest.activity;
 import android.os.Bundle;
 import android.view.View;
 
-import com.elvishew.xlog.XLog;
 import com.moko.ble.lib.MokoConstants;
 import com.moko.ble.lib.event.ConnectStatusEvent;
 import com.moko.ble.lib.event.OrderTaskResponseEvent;
 import com.moko.ble.lib.task.OrderTaskResponse;
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.MokoSupport;
-import com.moko.support.OrderTaskAssembler;
-import com.moko.support.entity.OrderCHAR;
-import com.moko.support.entity.ParamsKeyEnum;
+import com.moko.support.tof.MokoSupport;
+import com.moko.support.tof.OrderTaskAssembler;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.support.tof.entity.ParamsKeyEnum;
 import com.moko.tofsensortest.R;
 import com.moko.tofsensortest.adapter.AdInfoAdapter;
 import com.moko.tofsensortest.adapter.AdvInfo;
-import com.moko.tofsensortest.databinding.ActivityRangeDataBinding;
+import com.moko.tofsensortest.databinding.TofActivityRangeDataBinding;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -35,7 +34,7 @@ import java.util.Objects;
  * @des:
  */
 public class RangeDataActivity extends BaseActivity {
-    private ActivityRangeDataBinding mBind;
+    private TofActivityRangeDataBinding mBind;
     private AdInfoAdapter adapter;
 
     private final List<AdvInfo> advInfoList = new LinkedList<>();
@@ -44,7 +43,7 @@ public class RangeDataActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBind = ActivityRangeDataBinding.inflate(getLayoutInflater());
+        mBind = TofActivityRangeDataBinding.inflate(getLayoutInflater());
         setContentView(mBind.getRoot());
         EventBus.getDefault().register(this);
         adapter = new AdInfoAdapter(advInfoList);

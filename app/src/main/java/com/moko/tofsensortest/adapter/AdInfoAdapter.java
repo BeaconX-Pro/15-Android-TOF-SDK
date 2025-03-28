@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
  */
 public class AdInfoAdapter extends BaseQuickAdapter<AdvInfo, BaseViewHolder> {
     public AdInfoAdapter(@Nullable List<AdvInfo> data) {
-        super(R.layout.item_list, data);
+        super(R.layout.tof_item_list, data);
     }
 
     @Override

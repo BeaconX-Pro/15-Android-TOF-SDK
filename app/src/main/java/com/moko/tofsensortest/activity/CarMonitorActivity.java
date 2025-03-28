@@ -5,12 +5,12 @@ import android.text.TextUtils;
 
 import com.elvishew.xlog.XLog;
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.MokoBleScanner;
-import com.moko.support.MokoSupport;
-import com.moko.support.callback.MokoScanDeviceCallback;
-import com.moko.support.entity.DeviceInfo;
+import com.moko.support.tof.MokoBleScanner;
+import com.moko.support.tof.MokoSupport;
+import com.moko.support.tof.callback.MokoScanDeviceCallback;
+import com.moko.support.tof.entity.DeviceInfo;
 import com.moko.tofsensortest.R;
-import com.moko.tofsensortest.databinding.ActivityCarMonitorBinding;
+import com.moko.tofsensortest.databinding.TofActivityCarMonitorBinding;
 import com.moko.tofsensortest.utils.SPUtiles;
 import com.moko.tofsensortest.utils.ToastUtils;
 
@@ -22,7 +22,7 @@ import no.nordicsemi.android.support.v18.scanner.ScanRecord;
  * @des:
  */
 public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCallback {
-    private ActivityCarMonitorBinding mBind;
+    private TofActivityCarMonitorBinding mBind;
     private MokoBleScanner mokoBleScanner;
     private boolean isScan;
     private int num;
@@ -35,7 +35,7 @@ public class CarMonitorActivity extends BaseActivity implements MokoScanDeviceCa
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBind = ActivityCarMonitorBinding.inflate(getLayoutInflater());
+        mBind = TofActivityCarMonitorBinding.inflate(getLayoutInflater());
         setContentView(mBind.getRoot());
         mokoBleScanner = new MokoBleScanner();
         initViews();

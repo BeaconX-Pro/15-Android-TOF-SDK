@@ -10,7 +10,7 @@ public class AppConstants {
     public static final String PATTERN_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
     public static final String PATTERN_YYYY_MM_DD_HH_MM_SS = "yyyy/MM/dd HH:mm:ss";
     // sp
-    public static final String SP_NAME = "sp_name_erp_test";
+    public static final String SP_NAME = "sp_name_tof";
 
     public static final String SP_KEY_USER_ID = "SP_KEY_USER_ID";
     public static final String SP_KEY_USER_FULL_NAME = "SP_KEY_USER_FULL_NAME";

@@ -1,8 +1,11 @@
 package com.moko.tofsensortest.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.moko.ble.lib.MokoConstants;
 import com.moko.ble.lib.event.ConnectStatusEvent;
@@ -10,15 +13,16 @@ import com.moko.ble.lib.event.OrderTaskResponseEvent;
 import com.moko.ble.lib.task.OrderTask;
 import com.moko.ble.lib.task.OrderTaskResponse;
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.MokoBleScanner;
-import com.moko.support.MokoSupport;
-import com.moko.support.OrderTaskAssembler;
-import com.moko.support.callback.MokoScanDeviceCallback;
-import com.moko.support.entity.DeviceInfo;
-import com.moko.support.entity.OrderCHAR;
+import com.moko.support.tof.MokoBleScanner;
+import com.moko.support.tof.MokoSupport;
+import com.moko.support.tof.OrderTaskAssembler;
+import com.moko.support.tof.callback.MokoScanDeviceCallback;
+import com.moko.support.tof.entity.DeviceInfo;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.tofsensortest.BuildConfig;
 import com.moko.tofsensortest.adapter.AdInfoAdapter;
 import com.moko.tofsensortest.adapter.AdvInfo;
-import com.moko.tofsensortest.databinding.ActivityMainBinding;
+import com.moko.tofsensortest.databinding.TofActivityMainBinding;
 import com.moko.tofsensortest.utils.AdvInfoAnalysisImpl;
 import com.moko.tofsensortest.utils.ToastUtils;
 
@@ -26,22 +30,36 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends BaseActivity implements MokoScanDeviceCallback {
+public class ToFMainActivity extends BaseActivity implements MokoScanDeviceCallback {
     private List<AdvInfo> advInfoList;
     private MokoBleScanner mokoBleScanner;
     private AdInfoAdapter adapter;
-    private ActivityMainBinding mBind;
+    private TofActivityMainBinding mBind;
     private String mDevice;
+
+    public static String PATH_LOGCAT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBind = ActivityMainBinding.inflate(getLayoutInflater());
+        mBind = TofActivityMainBinding.inflate(getLayoutInflater());
         setContentView(mBind.getRoot());
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            // 优先保存到SD卡中
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                PATH_LOGCAT = getExternalFilesDir(null).getAbsolutePath() + File.separator + (BuildConfig.IS_LIBRARY ? "mokoBeaconXPro" : "ToFSensorTest");
+            } else {
+                PATH_LOGCAT = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + (BuildConfig.IS_LIBRARY ? "mokoBeaconXPro" : "ToFSensorTest");
+            }
+        } else {
+            // 如果SD卡不存在，就保存到本应用的目录下
+            PATH_LOGCAT = getFilesDir().getAbsolutePath() + File.separator + (BuildConfig.IS_LIBRARY ? "mokoBeaconXPro" : "ToFSensorTest");
+        }
         MokoSupport.getInstance().init(getApplicationContext());
         mokoBleScanner = new MokoBleScanner();
         advInfoList = new ArrayList<>();
@@ -50,7 +68,7 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         mBind.btnStart.setOnClickListener(v -> scanStart());
         mBind.btnConnect.setOnClickListener(v -> connectDevice());
         EventBus.getDefault().register(this);
-        mBind.btnCarMonitor.setOnClickListener(v-> startActivity(new Intent(this, CarMonitorActivity.class)));
+        mBind.btnCarMonitor.setOnClickListener(v -> startActivity(new Intent(this, CarMonitorActivity.class)));
     }
 
     @Override
@@ -92,11 +110,11 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
             return;
         }
         StringBuilder builder = new StringBuilder(mac);
-        builder.insert(2,":");
-        builder.insert(5,":");
-        builder.insert(8,":");
-        builder.insert(11,":");
-        builder.insert(14,":");
+        builder.insert(2, ":");
+        builder.insert(5, ":");
+        builder.insert(8, ":");
+        builder.insert(11, ":");
+        builder.insert(14, ":");
         showLoadingProgressDialog();
         mBind.btnConnect.postDelayed(() -> {
             MokoSupport.getInstance().connDevice(builder.toString().toUpperCase());
@@ -145,7 +163,7 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
                             Intent intent = new Intent(this, DeviceInfoActivity.class);
                             startActivity(intent);
                         } else {
-                            ToastUtils.showToast(MainActivity.this, "password error");
+                            ToastUtils.showToast(ToFMainActivity.this, "password error");
                         }
                     }
                     break;
@@ -190,13 +208,27 @@ public class MainActivity extends BaseActivity implements MokoScanDeviceCallback
         mokoBleScanner.startScanDevice(this);
     }
 
+    public void onBack(View view) {
+        if (isWindowLocked())
+            return;
+        back();
+    }
+
+    public void onAbout(View view) {
+        if (isWindowLocked())
+            return;
+        startActivity(new Intent(this, AboutActivity.class));
+    }
+
     @Override
     public void onBackPressed() {
         back();
     }
 
+
     private void back() {
         mokoBleScanner.stopScanDevice();
         finish();
     }
+
 }

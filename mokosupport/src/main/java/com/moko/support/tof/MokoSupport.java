@@ -1,4 +1,4 @@
-package com.moko.support;
+package com.moko.support.tof;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -13,9 +13,9 @@ import com.moko.ble.lib.event.ConnectStatusEvent;
 import com.moko.ble.lib.event.OrderTaskResponseEvent;
 import com.moko.ble.lib.task.OrderTask;
 import com.moko.ble.lib.task.OrderTaskResponse;
-import com.moko.support.entity.OrderCHAR;
-import com.moko.support.entity.ParamsKeyEnum;
-import com.moko.support.handler.MokoCharacteristicHandler;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.support.tof.entity.ParamsKeyEnum;
+import com.moko.support.tof.handler.MokoCharacteristicHandler;
 
 import org.greenrobot.eventbus.EventBus;
 

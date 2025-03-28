@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.moko.support.tof">
+    package="com.moko.tofsensortest">
     <!-- SDCard中创建与删除文件权限 -->
     <uses-permission
         android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"
@@ -16,7 +16,7 @@
         android:name="android.permission.BLUETOOTH_ADMIN"
         android:maxSdkVersion="30" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <!--12新权限 -->
@@ -27,9 +27,27 @@
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
-    <application
-        android:allowBackup="true"
-        android:supportsRtl="true">
+
+    <application android:allowBackup="true">
+        <activity
+            android:name="com.moko.tofsensortest.activity.ToFMainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.moko.tofsensortest.activity.DeviceInfoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.moko.tofsensortest.activity.AboutActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name="com.moko.tofsensortest.activity.CarMonitorActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.moko.tofsensortest.activity.RangeDataActivity"
+            android:screenOrientation="portrait" />
 
     </application>
 

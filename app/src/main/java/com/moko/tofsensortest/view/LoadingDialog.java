@@ -5,16 +5,16 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.moko.tofsensortest.R;
-import com.moko.tofsensortest.databinding.DialogLoadingBinding;
+import com.moko.tofsensortest.databinding.TofDialogLoadingBinding;
 
 import androidx.core.content.ContextCompat;
 
-public class LoadingDialog extends MokoBaseDialog<DialogLoadingBinding> {
+public class LoadingDialog extends MokoBaseDialog<TofDialogLoadingBinding> {
     public static final String TAG = LoadingDialog.class.getSimpleName();
 
     @Override
-    protected DialogLoadingBinding getViewBind(LayoutInflater inflater, ViewGroup container) {
-        return DialogLoadingBinding.inflate(inflater, container, false);
+    protected TofDialogLoadingBinding getViewBind(LayoutInflater inflater, ViewGroup container) {
+        return TofDialogLoadingBinding.inflate(inflater, container, false);
     }
 
     @Override

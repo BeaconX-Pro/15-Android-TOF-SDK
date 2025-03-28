@@ -1,7 +1,7 @@
-package com.moko.support.task;
+package com.moko.support.tof.task;
 
 import com.moko.ble.lib.task.OrderTask;
-import com.moko.support.entity.OrderCHAR;
+import com.moko.support.tof.entity.OrderCHAR;
 
 
 public class PasswordTask extends OrderTask {

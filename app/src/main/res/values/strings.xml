@@ -15,6 +15,11 @@
 
     <string name="setting_syncing">syncing</string>
 
+    <string name="company_name">MOKO TECHNOLOGY LTD.</string>
+    <string name="about_title">ABOUT</string>
+
+    <string name="company_website">www.mokoblue.com</string>
+
     <!--    <string name="t_h_tips_1"><![CDATA[*The device stores T&H data when the temperature changes arbitrarily or humidity changed ≥ %s%%.]]></string>-->
     <!--    <string name="t_h_tips_2"><![CDATA[*The device stores T&H data when the temperature changed ≥ %s ℃ or humidity changes arbitrarily.]]></string>-->
     <!--    <string name="t_h_tips_3"><![CDATA[*The device stores T&H data when the temperature or humidity changes arbitrarily.]]></string>-->

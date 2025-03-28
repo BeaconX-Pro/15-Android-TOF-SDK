@@ -1,10 +1,10 @@
-package com.moko.support;
+package com.moko.support.tof;
 
 import android.bluetooth.BluetoothDevice;
 
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.callback.MokoScanDeviceCallback;
-import com.moko.support.entity.DeviceInfo;
+import com.moko.support.tof.callback.MokoScanDeviceCallback;
+import com.moko.support.tof.entity.DeviceInfo;
 
 import java.util.ArrayList;
 import java.util.List;

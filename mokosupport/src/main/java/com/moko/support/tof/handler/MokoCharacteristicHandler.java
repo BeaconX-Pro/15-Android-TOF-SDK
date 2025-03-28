@@ -1,11 +1,11 @@
-package com.moko.support.handler;
+package com.moko.support.tof.handler;
 
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattService;
 
-import com.moko.support.entity.OrderCHAR;
-import com.moko.support.entity.OrderServices;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.support.tof.entity.OrderServices;
 
 import java.util.HashMap;
 

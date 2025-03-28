@@ -7,19 +7,19 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.moko.tofsensortest.R;
-import com.moko.tofsensortest.databinding.DialogLoadingMessageBinding;
+import com.moko.tofsensortest.databinding.TofDialogLoadingMessageBinding;
 
 import androidx.annotation.StringRes;
 import androidx.core.content.ContextCompat;
 
-public class LoadingMessageDialog extends MokoBaseDialog<DialogLoadingMessageBinding> {
+public class LoadingMessageDialog extends MokoBaseDialog<TofDialogLoadingMessageBinding> {
     public static final String TAG = LoadingMessageDialog.class.getSimpleName();
     private String message;
     private int messageId = -1;
 
     @Override
-    protected DialogLoadingMessageBinding getViewBind(LayoutInflater inflater, ViewGroup container) {
-        return DialogLoadingMessageBinding.inflate(inflater, container, false);
+    protected TofDialogLoadingMessageBinding getViewBind(LayoutInflater inflater, ViewGroup container) {
+        return TofDialogLoadingMessageBinding.inflate(inflater, container, false);
     }
 
     @Override

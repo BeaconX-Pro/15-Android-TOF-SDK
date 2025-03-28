@@ -1,16 +1,14 @@
-package com.moko.support;
+package com.moko.support.tof;
 
 
 import com.moko.ble.lib.task.OrderTask;
-import com.moko.support.entity.ParamsKeyEnum;
-import com.moko.support.task.GetAdvIntervalTask;
-import com.moko.support.task.GetTxPowerTask;
-import com.moko.support.task.ParamsTask;
-import com.moko.support.task.PasswordTask;
-import com.moko.support.task.SetAdvIntervalTask;
-import com.moko.support.task.SetTxPowerTask;
-
-import org.intellij.lang.annotations.JdkConstants;
+import com.moko.support.tof.entity.ParamsKeyEnum;
+import com.moko.support.tof.task.GetAdvIntervalTask;
+import com.moko.support.tof.task.GetTxPowerTask;
+import com.moko.support.tof.task.ParamsTask;
+import com.moko.support.tof.task.PasswordTask;
+import com.moko.support.tof.task.SetAdvIntervalTask;
+import com.moko.support.tof.task.SetTxPowerTask;
 
 public class OrderTaskAssembler {
 

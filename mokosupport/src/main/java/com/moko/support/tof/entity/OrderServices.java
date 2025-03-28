@@ -1,4 +1,4 @@
-package com.moko.support.entity;
+package com.moko.support.tof.entity;
 
 import java.util.UUID;
 

@@ -11,12 +11,12 @@ import com.moko.ble.lib.event.OrderTaskResponseEvent;
 import com.moko.ble.lib.task.OrderTask;
 import com.moko.ble.lib.task.OrderTaskResponse;
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.MokoSupport;
-import com.moko.support.OrderTaskAssembler;
-import com.moko.support.entity.OrderCHAR;
-import com.moko.support.entity.ParamsKeyEnum;
-import com.moko.support.entity.TxPowerEnum;
-import com.moko.tofsensortest.databinding.ActivityDeviceInfoBinding;
+import com.moko.support.tof.MokoSupport;
+import com.moko.support.tof.OrderTaskAssembler;
+import com.moko.support.tof.entity.OrderCHAR;
+import com.moko.support.tof.entity.ParamsKeyEnum;
+import com.moko.support.tof.entity.TxPowerEnum;
+import com.moko.tofsensortest.databinding.TofActivityDeviceInfoBinding;
 import com.moko.tofsensortest.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,11 +25,10 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 
 
 public class DeviceInfoActivity extends BaseActivity {
-    private ActivityDeviceInfoBinding mBind;
+    private TofActivityDeviceInfoBinding mBind;
 
     private boolean savedParamsError;
 
@@ -37,7 +36,7 @@ public class DeviceInfoActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBind = ActivityDeviceInfoBinding.inflate(getLayoutInflater());
+        mBind = TofActivityDeviceInfoBinding.inflate(getLayoutInflater());
         setContentView(mBind.getRoot());
 
         EventBus.getDefault().register(this);

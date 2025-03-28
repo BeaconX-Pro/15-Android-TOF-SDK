@@ -1,6 +1,6 @@
-package com.moko.support.callback;
+package com.moko.support.tof.callback;
 
-import com.moko.support.entity.DeviceInfo;
+import com.moko.support.tof.entity.DeviceInfo;
 
 public interface MokoScanDeviceCallback {
     void onStartScan();

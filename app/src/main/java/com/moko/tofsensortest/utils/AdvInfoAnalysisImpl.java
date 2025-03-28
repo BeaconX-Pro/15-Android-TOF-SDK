@@ -1,9 +1,9 @@
 package com.moko.tofsensortest.utils;
 
 import com.moko.ble.lib.utils.MokoUtils;
-import com.moko.support.MokoBleScanner;
-import com.moko.support.entity.DeviceInfo;
-import com.moko.support.service.AdvInfoAnalysis;
+import com.moko.support.tof.MokoBleScanner;
+import com.moko.support.tof.entity.DeviceInfo;
+import com.moko.support.tof.service.AdvInfoAnalysis;
 import com.moko.tofsensortest.adapter.AdvInfo;
 
 import java.text.SimpleDateFormat;
