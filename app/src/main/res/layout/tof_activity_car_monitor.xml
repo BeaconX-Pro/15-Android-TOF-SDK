@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
-            android:src="@drawable/back" />
+            android:src="@drawable/ic_back" />
 
         <TextView
             android:id="@+id/tv_title"

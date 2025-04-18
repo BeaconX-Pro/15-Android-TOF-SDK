@@ -8,8 +8,8 @@ import android.os.Bundle;
 import android.os.SystemClock;
 
 import com.elvishew.xlog.XLog;
-import com.moko.tofsensortest.view.LoadingDialog;
-import com.moko.tofsensortest.view.LoadingMessageDialog;
+import com.moko.lib.bxpui.dialog.LoadingDialog;
+import com.moko.lib.bxpui.dialog.LoadingMessageDialog;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
