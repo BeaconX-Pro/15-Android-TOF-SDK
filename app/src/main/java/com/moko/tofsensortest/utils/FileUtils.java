@@ -12,7 +12,6 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.text.TextUtils;
 
-import com.moko.tofsensortest.BaseApplication;
 import com.moko.tofsensortest.activity.ToFMainActivity;
 
 import java.io.BufferedInputStream;

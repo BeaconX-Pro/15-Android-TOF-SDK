@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 
-import com.moko.tofsensortest.BaseApplication;
 import com.moko.tofsensortest.BuildConfig;
 import com.moko.tofsensortest.activity.ToFMainActivity;
 

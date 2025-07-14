@@ -6,14 +6,14 @@ if (!isLibrary.toBoolean()) {
 
 android {
     namespace "com.moko.tofsensortest"
-    compileSdk 34
+    compileSdk 35
 
     defaultConfig {
 
-        minSdkVersion 26
-        targetSdk 34
-        versionCode 105
-        versionName "1.0.5"
+        minSdk 28
+        targetSdk 35
+        versionCode 106
+        versionName "1.0.6"
 
         def formatDate = new Date().format("yyyyMMddHHmm")
         setProperty("archivesBaseName", "ToFSensor_${versionName}_${formatDate}")
@@ -88,10 +88,10 @@ android {
 dependencies {
     if (!isLibrary.toBoolean()) {
         implementation project(path: ':mokosupport')
-        implementation 'com.github.MOKO-Android-Base-Library:MKBXPUILib:1.0.3'
+        implementation 'com.github.MOKO-Android-Base-Library:MKBXPUILib:1.0.4'
     } else {
         implementation files('libs/mokoSupport.jar')
-        compileOnly 'com.github.MOKO-Android-Base-Library:MKBXPUILib:1.0.3'
+        compileOnly 'com.github.MOKO-Android-Base-Library:MKBXPUILib:1.0.4'
         compileOnly 'com.github.MOKO-Android-Base-Library:MKBleLib:1.0.0-beacon'
     }
 }

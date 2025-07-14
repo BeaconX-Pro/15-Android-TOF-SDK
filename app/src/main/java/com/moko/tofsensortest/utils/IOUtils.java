@@ -13,7 +13,6 @@ import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
 import com.elvishew.xlog.XLog;
-import com.moko.tofsensortest.BaseApplication;
 import com.moko.tofsensortest.BuildConfig;
 import com.moko.tofsensortest.activity.ToFMainActivity;
 
