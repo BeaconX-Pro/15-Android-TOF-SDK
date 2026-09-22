@@ -6,14 +6,14 @@ if (!isLibrary.toBoolean()) {
 
 android {
     namespace "com.moko.tofsensortest"
-    compileSdk 35
+    compileSdk 36
 
     defaultConfig {
 
         minSdk 28
-        targetSdk 35
-        versionCode 106
-        versionName "1.0.6"
+        targetSdk 36
+        versionCode 107
+        versionName "1.0.7"
 
         def formatDate = new Date().format("yyyyMMddHHmm")
         setProperty("archivesBaseName", "ToFSensor_${versionName}_${formatDate}")
